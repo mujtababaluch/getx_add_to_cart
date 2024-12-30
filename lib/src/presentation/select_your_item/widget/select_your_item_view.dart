@@ -9,7 +9,21 @@ class SelectYourItemView extends GetView<SelectYourItemController> {
   Widget build(BuildContext context) {
     return GetBuilder<SelectYourItemController>(
       builder: (controller) {
-        return Text("Sssssss");
+        return ListView.builder(
+        itemCount: controller.cartList.length,
+        itemBuilder: (context, index) {
+          var cart = controller.cartList[index];
+          return ExpansionTile(
+            title: Text("Service ID: ${cart.servicesId}"),
+            children: cart.items!.map((item) {
+              return ListTile(
+                title: Text("${item.name}"),
+                subtitle: Text("Quantity: ${item.quantity}, Price: ${item.price}"),
+              );
+            }).toList(),
+          );
+        },
+      );
       },);
   }
 }
