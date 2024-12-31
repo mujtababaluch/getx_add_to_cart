@@ -16,11 +16,48 @@ class SelectYourItemView extends GetView<SelectYourItemController> {
           return ExpansionTile(
             title: Text("Service ID: ${cart.servicesId}"),
             children: cart.items!.map((item) {
-              return ListTile(
-                title: Text("${item.name}"),
-                subtitle: Text("Quantity: ${item.quantity}, Price: ${item.price}"),
+              return Column(
+                children: [
+                  ListTile(
+                    title: Text("${item.name}"),
+                    subtitle: Text(" Price: ${item.price}",style: const TextStyle(fontSize: 16),),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min, 
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.remove),
+                          onPressed: () {
+                            // Decrease quantity logic here
+                          },
+                        ),
+                        Text("${item.quantity}",
+                        style: const TextStyle(fontSize: 16.0),
+                        ), // Display the current quantity
+                        IconButton(
+                          icon: const Icon(Icons.add),
+                          onPressed: () {
+                            // Increase quantity logic here
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 16.0),
+                  //   child: item.addons!.isNotEmpty
+                  //       ? Column(
+                  //     children: item.addons!.map((addon) {
+                  //       return ListTile(
+                  //         title: Text("${addon.name}"),
+                  //         subtitle: Text("Quantity: ${addon.qty}, Price: ${addon.price}"),
+                  //       );
+                  //     }).toList(),
+                  //   ): const SizedBox.shrink(),
+                  // )
+                ],
               );
             }).toList(),
+
           );
         },
       );

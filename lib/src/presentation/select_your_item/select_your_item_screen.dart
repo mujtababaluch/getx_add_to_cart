@@ -7,11 +7,18 @@ class SelectYourItemScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Select Your Item'),
-      ),
-      body: const SafeArea(child: SelectYourItemView())
-      
-    );
+        appBar: AppBar(
+          title: const Text(
+            'Select Your Item',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.black87,
+        ),
+        body: const SafeArea(child: SelectYourItemView()));
   }
 }

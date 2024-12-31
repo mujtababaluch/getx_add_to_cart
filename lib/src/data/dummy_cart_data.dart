@@ -33,12 +33,7 @@ List<LaundryCartBody> dummyCartList = [
         price: 200,
         barCode: "PANT001",
         addons: [
-          LaundryCartAddonBody(
-            id: 3,
-            name: "Extra Starching",
-            price: 40,
-            qty: 1,
-          ),
+          
         ],
       ),
     ],
