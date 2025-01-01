@@ -57,5 +57,24 @@ void setQuantity(int laundryItemId, int serviceId, bool isIncrement, {bool isFro
   update();
 }
 
-
+ Future<void>  saveCartToStorage() async {
+    List<Map<String, dynamic>> cartjson = cartLisst.map(
+      (cartitem) => {
+        'servicesId' :cartitem.servicesId,
+        'items':cartitem.items!.map((item)=>{
+          "laundryItemId" : item.laundryItemId,
+          "quantity": item.quantity,
+          "price": item.price,
+          "name": item.name,
+          "addons" : item.addons!.map((addon)=> {
+            "addonId": addon.id,
+            "quantity": addon.qty,
+            "price": addon.price,
+            "name": addon.name
+          }).toList()
+        }).toList()
+      }).toList();
+      
+    print('cartjson: $cartjson');
+ }
 }

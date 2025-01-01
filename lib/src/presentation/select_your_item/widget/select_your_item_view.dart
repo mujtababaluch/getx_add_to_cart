@@ -35,7 +35,10 @@ class SelectYourItemView extends GetView<SelectYourItemController> {
                         ), 
                         IconButton(
                           icon: const Icon(Icons.add),
-                          onPressed: () => controller.setQuantity(item.laundryItemId!, cart.servicesId!, true, isFromCart: false),
+                          onPressed: () {
+                            controller.setQuantity(item.laundryItemId!, cart.servicesId!, true, isFromCart: false);
+                            controller.saveCartToStorage();
+                          },
                         ),
                       ],
                     ),
