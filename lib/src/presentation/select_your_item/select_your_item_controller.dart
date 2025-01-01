@@ -56,7 +56,49 @@ void setQuantity(int laundryItemId, int serviceId, bool isIncrement, {bool isFro
   // }
   update();
 }
-
+  void addtocart(int serviceId, int laundryItemId, int quantity,double price, String name,
+    {LaundryCartAddonBody? selectedAddon}){
+      LaundryCartBody? cartitem;
+      for(int i=0; i<cartLisst.length;i++){
+        if(cartLisst[i].servicesId == serviceId){
+          cartitem = cartLisst[i];
+          break;
+        }
+      }
+      if(cartitem !=null){
+        LaundryItemBody? item;
+        for(int i=0; i<cartitem.items!.length;i++){
+          if(cartitem.items![i].laundryItemId == laundryItemId){
+            item = cartitem.items![i];
+            break;
+          }
+        }
+        if(item !=null){
+          item.quantity = item.quantity! + quantity;
+      }
+      else {
+        cartitem.items!.add(LaundryItemBody(
+          laundryItemId: laundryItemId,
+          quantity: quantity,
+          price: price,
+          name: name,
+          addons: []
+        ));}
+      }
+      else {
+        cartLisst.add(LaundryCartBody(
+          servicesId: serviceId,
+          items: [LaundryItemBody(
+            laundryItemId: laundryItemId,
+            quantity: quantity,
+            price: price,
+            name: name,
+            addons: []
+          )]
+        ));
+      }
+       update();
+    }
  Future<void>  saveCartToStorage() async {
     List<Map<String, dynamic>> cartjson = cartLisst.map(
       (cartitem) => {
