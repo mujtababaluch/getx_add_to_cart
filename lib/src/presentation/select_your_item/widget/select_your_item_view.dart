@@ -10,9 +10,9 @@ class SelectYourItemView extends GetView<SelectYourItemController> {
     return GetBuilder<SelectYourItemController>(
       builder: (controller) {
         return ListView.builder(
-        itemCount: controller.cartList.length,
+        itemCount: controller.cartListdata.length,
         itemBuilder: (context, index) {
-          var cart = controller.cartList[index];
+          var cart = controller.cartListdata[index];
           return ExpansionTile(
             title: Text("Service ID: ${cart.servicesId}"),
             children: cart.items!.map((item) {
@@ -30,14 +30,12 @@ class SelectYourItemView extends GetView<SelectYourItemController> {
                             // Decrease quantity logic here
                           },
                         ),
-                        Text("${item.quantity}",
+                        Text("${controller.getQuantity(item.laundryItemId!,cart.servicesId!)}",
                         style: const TextStyle(fontSize: 16.0),
-                        ), // Display the current quantity
+                        ), 
                         IconButton(
                           icon: const Icon(Icons.add),
-                          onPressed: () {
-                            // Increase quantity logic here
-                          },
+                          onPressed: () => controller.setQuantity(item.laundryItemId!, cart.servicesId!, true, isFromCart: false),
                         ),
                       ],
                     ),
